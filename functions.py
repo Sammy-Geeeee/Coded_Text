@@ -1,7 +1,7 @@
 # Functions for the various methods of changing the text in attempt to encode it
 
 
-def de_encrypt_alphabetorder(alphabet, offset):
+def shiftAlphabetOrder(alphabet, offset):
     alphabet_list = []  # To store a list of all the alphabet characters
     new_alphabet_list = []  # To store a list of all the new alphabet characters
 
@@ -29,7 +29,7 @@ def de_encrypt_alphabetorder(alphabet, offset):
     return new_alphabet
 
 
-def de_encrypt_wordorder(text, offset):
+def shiftWordOrder(text, offset):
     new_words = []  # To store the new word order in
 
     words = text.split()  # To split the text string into a list of words
@@ -56,7 +56,7 @@ def de_encrypt_wordorder(text, offset):
     return new_text
 
 
-def de_encrypt_letterorder(text, offset):
+def shiftLetterOrder(text, offset):
     new_characters = []  # To store the new word order in
 
     words = text.split()  # To split the text string into a list of words
@@ -92,7 +92,7 @@ def de_encrypt_letterorder(text, offset):
     return new_text
 
 
-def de_encrypt_characterswap(text, alphabet, offset):
+def shiftCharacterSwap(text, alphabet, offset):
     new_characters = []  # To store the new letters in
 
     for character in text:  # To loop through all the characters in the text
@@ -122,10 +122,10 @@ def encrypt(text, offsets):
     for offset in offsets:  # To iterate through all the offsets
         new_offsets.append(abs(offset))  # To append teh absolute values of each offset as the new offset
 
-    new_alphabet = de_encrypt_alphabetorder(base_alphabet, new_offsets[0])  # creates the new alphabet
-    new_wordorder = de_encrypt_wordorder(text, new_offsets[1])  # Changes the word order
-    new_letterorder = de_encrypt_letterorder(new_wordorder, new_offsets[2])  # Changes the letter order
-    new_text = de_encrypt_characterswap(new_letterorder, new_alphabet, new_offsets[3])  # Performs the letter swap
+    new_alphabet = shiftAlphabetOrder(base_alphabet, new_offsets[0])  # creates the new alphabet
+    new_wordorder = shiftWordOrder(text, new_offsets[1])  # Changes the word order
+    new_letterorder = shiftLetterOrder(new_wordorder, new_offsets[2])  # Changes the letter order
+    new_text = shiftCharacterSwap(new_letterorder, new_alphabet, new_offsets[3])  # Performs the letter swap
     return new_text
 
 
@@ -136,8 +136,8 @@ def decrypt(text, offsets):
     for offset in offsets:  # To loop through all the offsets in the offset list
         new_offsets.append(-abs(offset))  # To make all the new offsets negative
 
-    new_alphabet = de_encrypt_alphabetorder(base_alphabet, abs(new_offsets[0]))  # To find the new alphabet again
-    new_characterswap = de_encrypt_characterswap(text, new_alphabet, new_offsets[3])  # To change the characters back
-    new_letterorder = de_encrypt_letterorder(new_characterswap, new_offsets[2])  # To change the letter order back
-    new_text = de_encrypt_wordorder(new_letterorder, new_offsets[1])  # To change the word order back
+    new_alphabet = shiftAlphabetOrder(base_alphabet, abs(new_offsets[0]))  # To find the new alphabet again
+    new_characterswap = shiftCharacterSwap(text, new_alphabet, new_offsets[3])  # To change the characters back
+    new_letterorder = shiftLetterOrder(new_characterswap, new_offsets[2])  # To change the letter order back
+    new_text = shiftWordOrder(new_letterorder, new_offsets[1])  # To change the word order back
     return new_text
