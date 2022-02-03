@@ -26,3 +26,7 @@ def main():
 
 
 main()
+
+
+# Future Improvements
+# Change the text inputs from lines into boxes for more text options
