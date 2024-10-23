@@ -1,7 +1,11 @@
 # Text Encoding Program
 
-# This program is to take a string of text and then make it all different so it can't be read
-# Then there will a decoding section to ensure that it can be reversed and read as per normal again
+"""
+This program is to take a string of text and then make it all different so it can't be read
+Then there will a decoding section to ensure that it can be reversed and read as per normal again
+
+This program was made out of me seeing if I could implement it successfully
+"""
 
 
 import tkinter as tk
